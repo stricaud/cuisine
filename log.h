@@ -37,6 +37,20 @@ char *__get_time_now(void)
   return time_str;
 }
 
+char __log_level_to_char(int level)
+{
+  switch(level) {
+  case 1: return 'D';
+  case 2: return 'C';
+  case 3: return 'E';
+  case 4: return 'W';
+  case 5: return 'N';
+  case 6: return 'Q';
+  }
+
+  return '*';
+}
+
 void __log_func(int level, char *fmt, ...)
 {
   va_list ap;
@@ -45,7 +59,7 @@ void __log_func(int level, char *fmt, ...)
   if (level < log_level) return;
   if (!_fp) { _fp = stderr; }
   
-  fprintf(_fp, "[%s] ", __get_time_now());
+  fprintf(_fp, "[%s] [%c] ", __get_time_now(), __log_level_to_char(level));
   
   va_start(ap, fmt);
   vfprintf(_fp, fmt, ap);
