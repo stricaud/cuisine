@@ -22,6 +22,10 @@
 
 #define LOG_COLOR_CODE_RESET "\x1B[0m"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 static int log_level = LOG_LEVEL_WARNING;
 static int log_default_color = 0;
 static int log_time = 1;
@@ -175,4 +179,8 @@ void log_test()
   log_notice("notice\n");
 }
 
+#ifdef __cplusplus
+} // extern "C"
+#endif
+  
 #endif // _LOG_H_
