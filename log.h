@@ -26,6 +26,8 @@
 extern "C" {
 #endif
 
+#ifndef LOG_DEACTIVATE
+  
 static int log_level = LOG_LEVEL_WARNING;
 static int log_default_color = 0;
 static int log_time = 1;
@@ -180,6 +182,27 @@ static void log_test()
   log_notice("notice\n");
 }
 
+#else // LOG_DEACTIVATE
+
+#define log_set_level(level) {(void)0;}
+#define log_set_default_color(default_color) {(void)0;}
+#define log_set_time(t) {(void)0;}
+#define log_set_fp(fp) {(void)0;} 
+#define log_debug(f, ...) {(void)0;}
+#define log_debug_c(c, f, ...) {(void)0;}
+#define log_crit(f, ...) {(void)0;}
+#define log_crit_c(c, f, ...) {(void)0;}
+#define log_error(f, ...) {(void)0;}
+#define log_error_c(c, f, ...) {(void)0;}
+#define log_warning(f, ...) {(void)0;}
+#define log_warning_c(c, f, ...) {(void)0;}
+#define log_notice(f, ...) {(void)0;}
+#define log_notice_c(c, f, ...) {(void)0;}
+#define log_enter(f, ...) {(void)0;}
+#define log_leave(f, ...) {(void)0;}
+#define log_test() {(void)0;}
+#endif // LOG_DEACTIVATE
+  
 #ifdef __cplusplus
 } // extern "C"
 #endif
